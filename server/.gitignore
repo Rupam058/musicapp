@@ -1,0 +1,5 @@
+# pychach builds
+*.pyc
+
+#secrets
+/database_url.py
