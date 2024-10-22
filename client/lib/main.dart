@@ -1,12 +1,20 @@
 import 'package:client/core/theme/theme.dart';
-import 'package:client/features/auth/view/pages/signup_page.dart';
+import 'package:client/features/auth/view/pages/login_page.dart';
+import 'package:client/features/auth/viewmodel/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // initializing shared preferences
+  final container = ProviderContainer();
+  await container.read(authViewModelProvider.notifier).initSharedPreferences();
+
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    UncontrolledProviderScope(
+      container: container,
+      child: const MyApp(),
     ),
   );
 }
@@ -19,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.darkThememMode,
-      home: const SignupPage(),
+      home: const LoginPage(),
     );
   }
 }
