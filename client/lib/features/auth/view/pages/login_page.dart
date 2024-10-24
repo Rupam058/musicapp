@@ -5,6 +5,7 @@ import 'package:client/features/auth/view/pages/signup_page.dart';
 import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:client/features/auth/view/widgets/custom_field.dart';
 import 'package:client/features/auth/viewmodel/auth_viewmodel.dart';
+import 'package:client/features/home/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +33,7 @@ class LoginState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(authViewModelProvider)?.isLoading == true;
+    final isLoading = ref.watch(authViewModelProvider.select((value) => value?.isLoading == true));
 
     ref.listen(
       authViewModelProvider,
@@ -41,14 +42,12 @@ class LoginState extends ConsumerState<LoginPage> {
           data: (data) {
             showSnackBar(context, 'Login Successful');
 
-            // TODO: Navigate to the homepage
-
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => const LoginPage(),
-            //   ),
-            // );
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ),
+                (_) => false);
           },
           error: (error, st) {
             showSnackBar(context, error.toString());
