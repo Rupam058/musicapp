@@ -1,21 +1,26 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class CustomField extends StatelessWidget {
   final String hintText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final bool isObsureText;
+  final bool readOnly;
+  final VoidCallback? onTap;
 
   const CustomField({
     super.key,
     required this.hintText,
     required this.controller,
     this.isObsureText = false,
+    this.readOnly = false,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap: onTap,
+      readOnly: readOnly,
       decoration: InputDecoration(
         hintText: hintText,
       ),
