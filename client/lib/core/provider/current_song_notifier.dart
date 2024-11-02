@@ -16,6 +16,7 @@ class CurrentSongNotifier extends _$CurrentSongNotifier {
   }
 
   void updateSong(SongModel song) async {
+    await audioPlayer?.stop();
     audioPlayer = AudioPlayer();
 
     final audioSource = AudioSource.uri(
@@ -24,8 +25,8 @@ class CurrentSongNotifier extends _$CurrentSongNotifier {
 
     await audioPlayer!.setAudioSource(audioSource);
 
-    audioPlayer!.playerStateStream.listen((event) {
-      if (event.processingState == ProcessingState.completed) {
+    audioPlayer!.playerStateStream.listen((value) {
+      if (value.processingState == ProcessingState.completed) {
         audioPlayer!.seek(Duration.zero);
         audioPlayer!.pause();
         isPlaying = false;
@@ -47,5 +48,11 @@ class CurrentSongNotifier extends _$CurrentSongNotifier {
     }
     isPlaying = !isPlaying;
     state = state?.copyWith(hex_code: state?.hex_code);
+  }
+
+  void seek(double val) {
+    audioPlayer!.seek(Duration(
+      milliseconds: (val * audioPlayer!.duration!.inMilliseconds).toInt(),
+    ));
   }
 }
