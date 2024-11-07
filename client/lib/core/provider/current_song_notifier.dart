@@ -1,5 +1,7 @@
+// ignore_for_file: avoid_public_notifier_properties
 import 'package:client/features/home/models/song_model.dart';
 import 'package:client/features/home/repositories/home_local_repository.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -25,6 +27,12 @@ class CurrentSongNotifier extends _$CurrentSongNotifier {
 
     final audioSource = AudioSource.uri(
       Uri.parse(song.song_url),
+      tag: MediaItem(
+        id: song.id,
+        title: song.song_name,
+        album: song.artist,
+        artUri: Uri.parse(song.thumbnail_url),
+      ),
     );
 
     await audioPlayer!.setAudioSource(audioSource);

@@ -6,7 +6,7 @@ part of 'home_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getAllSongsHash() => r'a53a3d396d1fb56df51c87f5b8268be0061ba2d3';
+String _$getAllSongsHash() => r'a06f06bef1b9213d7a6fb1458e5a4d32f0c45f7e';
 
 /// See also [getAllSongs].
 @ProviderFor(getAllSongs)
@@ -20,7 +20,23 @@ final getAllSongsProvider = AutoDisposeFutureProvider<List<SongModel>>.internal(
 );
 
 typedef GetAllSongsRef = AutoDisposeFutureProviderRef<List<SongModel>>;
-String _$homeViewModelHash() => r'f9fd240b7872830e69ba7f78b85ae6bf40ea5b34';
+String _$getAllFavSongsHash() => r'8b849d98d68111ee5886478449f81b5b8609cd58';
+
+/// See also [getAllFavSongs].
+@ProviderFor(getAllFavSongs)
+final getAllFavSongsProvider =
+    AutoDisposeFutureProvider<List<SongModel>>.internal(
+  getAllFavSongs,
+  name: r'getAllFavSongsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getAllFavSongsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetAllFavSongsRef = AutoDisposeFutureProviderRef<List<SongModel>>;
+String _$homeViewModelHash() => r'3edbdc2983123907948a1324bd8a56ce4086d2c6';
 
 /// See also [HomeViewModel].
 @ProviderFor(HomeViewModel)

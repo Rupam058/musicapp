@@ -34,6 +34,7 @@ class SongsPage extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.only(
               left: 16.0,
